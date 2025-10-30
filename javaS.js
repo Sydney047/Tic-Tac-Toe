@@ -1,25 +1,29 @@
-const button = document.querySelector("#butt")
+const button = document.querySelector("#butt");
+const yours = document.querySelector("#yours");
+const tied = document.querySelector("#draw");
+const computer = document.querySelector("#ai");
 
 let yourScore = 0;
 let computerScore = 0;
 let draw = 0;
+let round = 1;
 
 function playRound(){
     let humanSelection = h_Choice().toLowerCase();
     let computerSelection = c_choice();
 
     if(humanSelection === computerSelection){
-        console.log(`You chose ${humanSelection} and the computer chose ${computerSelection}`);
-        console.log("It is a draw");
-        draw++;    
+        alert(`You chose ${humanSelection} and the computer chose ${computerSelection} \nIt is a draw`);
+        draw++;
+        tied.textContent = draw;    
     }else if((humanSelection == "rock" && computerSelection=="scissors")||(humanSelection=="paper"&&computerSelection=="rock")||(humanSelection=="scissors"&&computerSelection=="paper")){
-        console.log(`You chose ${humanSelection} and computer chose ${computerSelection}`);
-        console.log("You Win!");
-        yourScore++;   
+        alert(`You chose ${humanSelection} and computer chose ${computerSelection} \n You Win!`);
+        yourScore++;
+        yours.textContent = yourScore;   
     }else {
-        console.log(`You chose ${humanSelection} and computer chose ${computerSelection}`);
-        console.log("You Lost!");
+        alert(`You chose ${humanSelection} and computer chose ${computerSelection} \n You Lost!`);
         computerScore++; 
+        computer.textContent = computerScore;
     }
 }
 
@@ -37,20 +41,20 @@ function c_choice() {
         return "scissors";
     }
 }
+
+
 button.addEventListener("click", function play() {
-    alert("So you challenged me to rock paper scissors?\n Best 3 out of 5 wins")
-    for (let i=0; i<5; i++) {
-        alert(`Round ${i+1}`)
+    if (round < 6 ) {
+        alert(`Round ${round}`)
         playRound();
+        round++;
+    } else {
+        if(yourScore>computerScore){
+            alert(`Your final score out of 5: ${yourScore} \n You defeated the boss`);
+        }else if(yourScore === computerScore){
+            alert(`Your final score out of 5: ${yourScore} \n Computer's score: ${computerScore} \n It Looks like we have a tie!`);
+        }else {
+            alert(`Your final score out of 5: ${yourScore} \n Computer's score: ${computerScore} \n Feel free to try again`);
     }
-    if(yourScore>computerScore){
-        console.log(`Your final score out of 5: ${yourScore}`);
-        console.log("You defeated the boss");
-    }else if(yourScore === computerScore){
-        console.log(`Your final score out of 5: ${yourScore} \n Computer's score: ${computerScore}`);
-        console.log("It Looks like we have a tie!");
-    }else {
-        console.log(`Your final score out of 5: ${yourScore} \n Computer's score: ${computerScore}`);
-        console.log("Feel free to try again");
     }
 })
