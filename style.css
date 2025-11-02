@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-template: 15ch 1fr / 3fr 1fr ;
+    grid-gap: 5ch;
+}
+.header {
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+}
+.game {
+    display: grid;
+    grid-template: repeat(3, 20ch) / repeat(3, 20ch)  ;
+    gap: .7rem;
+    justify-content: center;
+}
+.division {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    font-size: 6rem;
+}
