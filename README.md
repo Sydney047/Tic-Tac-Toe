@@ -1,2 +1,2 @@
 # Actually-Tic-Tac-Toe
-Tic Tac Toe game played against your friend
+Would you like to play a game of tic tac toe.? You would! Well then you better grab a friend
