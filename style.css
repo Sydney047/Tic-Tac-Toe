@@ -1,6 +1,12 @@
+:root {
+    background-color: #7dadca;
+}
+.dialog::backdrop {
+    background-image: linear-gradient(top left, #54acbf #266586 #023859);
+}
 .container {
     display: grid;
-    grid-template: 15ch 1fr / 3fr 1fr ;
+    grid-template: 15ch 1fr 5ch / 3fr 1fr ;
     grid-gap: 5ch;
 }
 .header {
@@ -8,10 +14,11 @@
     display: flex;
     justify-content: center;
     font-size: 2rem;
+    gap: 1ch;
 }
 .game {
     display: grid;
-    grid-template: repeat(3, 20ch) / repeat(3, 20ch)  ;
+    grid-template: repeat(3, 20ch) 5ch / repeat(3, 20ch)  ;
     gap: .7rem;
     justify-content: center;
 }
@@ -19,7 +26,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid black;
+    background-color: #c2e8ff;
+    border: none;
     border-radius: 10px;
     font-size: 6rem;
+}
+.players {
+    display: grid;
+    grid-template: 5ch 1fr 1fr / 1fr 1fr ;
+    color: #052659;
+}
+.players > .div {
+    position: relative;
+    right: 15ch;
+    top: 10ch;
+}
+.players > .createdDiv {
+    grid-area: 3 / 1 / -1 / -1; 
+    position: relative;
+    right: 10ch;
+}
+.buttons {
+    grid-column: 1/ -1;
+    display: flex;
+    align-items: center;
+}
+.game > .buttons {
+    gap: 5ch;
+    justify-content: center;
+}
+button {
+    width: 17ch;
+    padding: .44rem;
+    border: none;
+    border-radius: .3rem;
+    background-color: #c2e8ff;
+}
+button:hover {
+    border: 2.5px groove #3f6593;
+}
+#addBtn {
+    width: 20ch;
+}
+h1 {
+    color: #081f5c;
+}
+.red {
+    color: #8d0004;
 }

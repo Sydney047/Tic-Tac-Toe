@@ -8,13 +8,31 @@
 </head>
 <body>
     <div class="container">
-        <div class="header"><h1>Tic Tac Toe</h1></div>
+        <div class="header"><h1 class="red">Tic</h1> <h1 class="blue">  Tac</h1> <h1 class="red">  Toe</h1></div>
         <div class="game">
             <div class="division box1"></div> <div class="division box2"></div> <div class="division box3"></div>
             <div class="division box4"></div> <div class="division box5"></div> <div class="division box6"></div>
             <div class="division box7"></div> <div class="division box8"></div> <div class="division box9"></div>
+            <div class="buttons">
+                <button id="reset">Restart</button>
+                <button id="finish">End Game</button>
         </div>
-        <div class="players"><button id="addBtn">Add Player Names</button></div>
+        </div>
+        <div class="players">
+            <div class="div buttons">
+                <button id="addBtn">Add Player Names</button>
+            </div>
+            <div class="div player1Details">
+                <h3 id="name1">Player 1</h3>
+                <p>Marker: X</p>
+                <p id="score1">Score: 0</p>
+            </div>
+            <div class="div player2Details">
+                <h3 id="name2">Player 2</h3>
+                <p>Marker: O</p>
+                <p id="score2">Score: 0</p>
+            </div>
+        </div>
         <dialog class="dialog">
             <form >
                 <label for="player1">Player 1 name <input id="player1" type="text" placeholder="Sydney"></label>

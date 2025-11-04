@@ -9,10 +9,16 @@ const box8 = document.querySelector(".box8");
 const box9 = document.querySelector(".box9");
 const addButton = document.querySelector("#addBtn");
 const closeButton = document.querySelector("#close");
+const resetButton = document.querySelector("#reset");
+const endButton = document.querySelector("#finish");
 const dialog = document.querySelector(".dialog");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
 const players = document.querySelector(".players");
+const name1 = document.querySelector("#name1");
+const name2 = document.querySelector("#name2");
+const score1 = document.querySelector("#score1");
+const score2 = document.querySelector("#score2");
 
 let map = [
     [4, 5, 6],
@@ -25,22 +31,26 @@ let round = 1;
 function playGround(i, j, box){
     function play(){
         if ((round%2===1)&(!(map[i][j]===1)&!(map[i][j]===2))) {
+            box.setAttribute("style","color: #a80001");
             box.textContent = "X";
             map[i][j] = 1;
             round++;
             if ((round>=5)&&((map[0][0]===map[0][1]&&map[0][1]===map[0][2])||(map[1][0]===map[1][1]&&map[1][1]===map[1][2])||(map[2][0]===map[2][1]&&map[2][1]===map[2][2])||
                             (map[0][0]===map[1][0]&&map[1][0]===map[2][0])||(map[0][1]===map[1][1]&& map[1][1]===map[2][1])||(map[0][2]===map[1][2]&&map[1][2]===map[2][2])||
                             (map[0][0]===map[1][1]&&map[1][1]===map[2][2])||(map[0][2]===map[1][1]&&map[1][1]===map[2][0]))) {
-                                alert(`Player1 won`);
+                                play1.updateScore();
+                                score1.textContent = `Score: ${play1.score}`;
                             }
         }else if ((round%2===0)&(!(map[i][j]===1)&!(map[i][j]===2))) {
+            box.setAttribute("style","color:blue");
             box.textContent = "O";
             map[i][j] = 2;
             round++;
             if ((round>=6)&&((map[0][0]===map[0][1]&&map[0][1]===map[0][2])||(map[1][0]===map[1][1]&&map[1][1]===map[1][2])||(map[2][0]===map[2][1]&&map[2][1]===map[2][2])||
                             (map[0][0]===map[1][0]&&map[1][0]===map[2][0])||(map[0][1]===map[1][1]&& map[1][1]===map[2][1])||(map[0][2]===map[1][2]&&map[1][2]===map[2][2])||
                             (map[0][0]===map[1][1]&&map[1][1]===map[2][2])||(map[0][2]===map[1][1]&&map[1][1]===map[2][0]))) {
-                                alert(`Player2 won`);
+                                play2.updateScore();
+                                score2.textContent = `Score: ${play2.score}`;
                             }
         }
     }
@@ -68,47 +78,21 @@ function Player(){
     this.score;
     this.marker;
 }
-function CreatePlayerNames(name1, name2){
-    const play1 = new Player();
-    play1.name = name1;
-    play1.marker = "X";
-    play1.score = 0;
+Player.prototype.updateScore = function(){
+    this.score += 1;
+}
+const play1 = new Player();
+play1.score = 0;
 
-    const play2 = new Player();
-    play2.name = name2;
-    play2.marker = "O";
-    play2.score = 0;
+const play2 = new Player();
+play2.score = 0;
 
-    const div1 = document.createElement("div");
-    const header1 = document.createElement("h3");
-    const marker1 = document.createElement("p");
-    const score1 = document.createElement("p");
+function CreatePlayerNames(name3, name4){
+    play1.name = name3;
+    name1.textContent = play1.name;
 
-    const div2 = document.createElement("div");
-    const header2 = document.createElement("h3");
-    const marker2 = document.createElement("p");
-    const score2 = document.createElement("p");
-
-    header1.textContent = play1.name;
-    marker1.textContent = `Marker ${play1.marker}`;
-    score1.textContent = `Score ${play1.score}`;
-
-    header2.textContent = play2.name;
-    marker2.textContent = `Marker ${play2.marker}`;
-    score2.textContent = `Score ${play2.score}`;
-
-    div1.appendChild(header1);
-    div1.appendChild(marker1);
-    div1.appendChild(score1);
-
-    div2.appendChild(header2);
-    div2.appendChild(marker2);
-    div2.appendChild(score2);
-
-    players.appendChild(div1);
-    players.appendChild(div2);
-
-    return {play1, play2}
+    play2.name = name4;
+    name2.textContent = play2.name;
 }
 
 box1Round = playGround(0,0, box1);
@@ -140,3 +124,22 @@ closeButton.addEventListener("click", function close() {
     CreatePlayerNames(player1Name, player2Name);
     dialog.close();
 });
+
+resetButton.addEventListener("click", clear);
+
+endButton.addEventListener("click", function finish(){
+    if (play1.score > play2.score) {
+        let points = play1.score - play2.score;
+        const results = document.createElement("h2");
+        results.classList.add("createdDiv");
+        results.textContent = `${play1.name} won by ${points} points`;
+        players.appendChild(results);
+
+    }else if (play1.score < play2.score) {
+        let points = play2.score - play1.score;
+        const results = document.createElement("h2");
+        results.classList.add("createdDiv");
+        results.textContent = `${play2.name} won by ${points} points`;
+        players.appendChild(results);
+    }
+})
